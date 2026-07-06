@@ -21,8 +21,17 @@ x=[[bedroom,bathroom,living_area,condition_of_house,school]]
 pred =st.button("Predict")
 
 if pred==True:
-    np_array=np.array(x)
-    price=int(model.predict(np_array)[0])
-    st.write(f"House price={price}")
+    
+    if (
+        bedroom == 0 or
+        bathroom == 0 or
+        condition_of_house == 0 or
+        school == 0
+    ):
+        st.warning("⚠️ Please enter the values for all required fields.")
+    else:
+        np_array = np.array(x)
+        price = int(model.predict(np_array)[0])
+        st.success(f"🏠 Predicted House Price = {price}")
 else:
-    st.write("Please click")
+    st.info("Please click the **Predict** button.")
